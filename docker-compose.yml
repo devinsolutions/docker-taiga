@@ -1,0 +1,20 @@
+version: "3.2"
+volumes:
+  media:
+services:
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: taiga
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_USER: taiga
+    stop_signal: SIGINT
+  server:
+    image: devinsolutions/taiga:latest
+    healthcheck:
+      test: wget -q -t 1 --spider http://localhost:8080/api/v1/
+    ports:
+      - 8080:8080
+    stop_signal: SIGHUP
+    volumes:
+      - media:/srv/taiga-back/media
