@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+drop_privileges() {
+	su -p taiga -s /bin/sh -c "$*"
+}
+
+main() {
+	chown -R taiga:taiga /srv/taiga-back/media
+
+	if [ "$#" -ne 0 ]; then
+		exec "$@"
+	fi
+
+	drop_privileges ./manage.py check --deploy
+	./manage.py collectstatic --no-input
+	# Several migrations write to the media directory
+	drop_privileges ./manage.py migrate --no-input
+
+	exec uwsgi /usr/local/etc/uwsgi/uwsgi.ini
+}
+
+main "$@"
