@@ -92,5 +92,6 @@ ENV \
     # See https://uwsgi-docs.readthedocs.io/en/latest/StaticFiles.html#offloading and
     # https://uwsgi-docs.readthedocs.io/en/latest/OffloadSubsystem.html.
     UWSGI_OFFLOAD_THREADS=1
-ENTRYPOINT ["entrypoint"]
+ENTRYPOINT ["taiga-ctl"]
+CMD ["migrate", "runserver"]
 EXPOSE 8080
