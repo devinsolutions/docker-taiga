@@ -29,6 +29,7 @@ RUN set -ex; \
         \) -exec rm -rf '{}' +; \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
+# !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
 ENV TAIGA_VERSION=4.2.7 \
     TAIGA_BACK_SHA256SUM=a25f4c880fceb6552c0ffd027ec5345a54a13b2a1379e586efd1d6de3bbf42a6 \
     TAIGA_FRONT_SHA256SUM=b0f94806455b811848b3e10df8d3f63a0a741da83296d267fe83b19767597ee7
