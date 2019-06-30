@@ -1,14 +1,17 @@
 version: "3.2"
 volumes:
+  database:
   media:
 services:
   database:
-    image: postgres:latest
+    image: postgres:11
     environment:
       POSTGRES_DB: taiga
       POSTGRES_PASSWORD: changeme
       POSTGRES_USER: taiga
     stop_signal: SIGINT
+    volumes:
+      - database:/var/lib/postgresql/data
   server:
     image: devinsolutions/taiga:latest
     healthcheck:
