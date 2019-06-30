@@ -1,0 +1,35 @@
+version: "3.4"
+volumes:
+  database:
+  media:
+x-taiga-common: &taiga-common
+  image: devinsolutions/taiga:latest
+  volumes:
+    - media:/srv/taiga-back/media
+services:
+  database:
+    image: postgres:11
+    environment:
+      POSTGRES_DB: taiga
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_USER: taiga
+    stop_signal: SIGINT
+    volumes:
+      - database:/var/lib/postgresql/data
+  migrations:
+    <<: *taiga-common
+    command: migrate
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+  server:
+    <<: *taiga-common
+    command: runserver
+    deploy:
+      replicas: 2
+    healthcheck:
+      test: wget -q -t 1 --spider http://localhost:8080/api/v1/
+    ports:
+      - 8080:8080
+    stop_signal: SIGHUP
