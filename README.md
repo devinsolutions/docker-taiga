@@ -9,7 +9,8 @@ uWSGI to serve them both.
 Consult [Taiga: Setup production environment](
 https://taigaio.github.io/taiga-doc/dist/setup-production.html) to learn about
 external dependencies and basic configuration options. A very basic deployment
-example can be found in `docker-compose.yml`.
+example can be found in `docker-compose.yml` and an advanced one in
+`docker-compose.advanced.yml`.
 
 ### Configuring taiga-back
 

@@ -1,0 +1,55 @@
+#!/bin/sh -e
+
+check_passed=0
+
+drop_privileges() {
+	su -p taiga -s /bin/sh -c "$*"
+}
+
+run_check() {
+	if [ "${check_passed}" -ne 0 ]; then
+		return
+	fi
+
+	drop_privileges ./manage.py check --deploy
+
+	check_passed=1
+}
+
+main() {
+	BASENAME="$(basename "$0")"
+
+	if [ "$#" -lt 1 ]; then
+		echo "Usage: ${BASENAME} COMMAND..."
+		echo
+		echo "Available commands are:"
+		echo
+		echo "  migrate     Runs Django migrations"
+		echo "  runserver   Collects static files and starts uWSGI server"
+		echo
+		exit
+	fi
+
+	chown -R taiga:taiga /srv/taiga-back/media
+
+	for command in "$@"; do
+		case "${command}" in
+			"migrate")
+				run_check
+				# Several migrations write to the media directory
+				drop_privileges ./manage.py migrate --no-input
+				;;
+			"runserver")
+				run_check
+				./manage.py collectstatic --no-input
+				exec uwsgi /usr/local/etc/uwsgi/uwsgi.ini
+				;;
+			*)
+				echo "Unknown ${BASENAME} command '${command}'." >&2
+				exit 1
+				;;
+		esac
+	done
+}
+
+main "$@"
