@@ -29,6 +29,10 @@ if 'django.middleware.security.SecurityMiddleware' not in MIDDLEWARE_CLASSES:
         'django.middleware.security.SecurityMiddleware',
     ] + MIDDLEWARE_CLASSES
 
+INSTALLED_APPS += [
+    'taiga_contrib_google_auth',
+]
+
 SILENCED_SYSTEM_CHECKS = [
     # X-Frame-Options header is set by the server
     'security.W002',

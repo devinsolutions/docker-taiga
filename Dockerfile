@@ -84,6 +84,38 @@ RUN set -ex; \
         \) -exec rm -rf '{}' +; \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
+ENV TAIGA_GOOGLE_AUTH_VERSION=d9933cc387d9402de1250d8280152eccebd0bf4d \
+    TAIGA_GOOGLE_AUTH_SHA256SUM=4983a5517b13da033bb9abf5b26ed6ef2c68abdc51d5cf3645e1dad830d63278
+RUN set -ex; \
+    \
+    apk add --no-cache --virtual .build-deps \
+        jq \
+    ; \
+    \
+    wget -q -O taiga-contrib-google-auth.tar.gz \
+        https://github.com/Nox-404/taiga-contrib-google-auth/archive/${TAIGA_GOOGLE_AUTH_VERSION}.tar.gz; \
+    echo "${TAIGA_GOOGLE_AUTH_SHA256SUM}  taiga-contrib-google-auth.tar.gz" | sha256sum -c; \
+    tar -xzf taiga-contrib-google-auth.tar.gz; \
+    rm taiga-contrib-google-auth.tar.gz; \
+    cd taiga-contrib-google-auth-${TAIGA_GOOGLE_AUTH_VERSION}; \
+    pip install --no-cache-dir ./back; \
+    mkdir /opt/taiga-front/plugins; \
+    cp -rL front/dist /opt/taiga-front/plugins/google-auth; \
+    cd ..; \
+    rm -r taiga-contrib-google-auth-${TAIGA_GOOGLE_AUTH_VERSION}; \
+    jq '.contribPlugins += ["/plugins/google-auth/google-auth.json"] | .googleClientId = null' \
+        /etc/opt/taiga-front/conf.json > conf.json; \
+    mv conf.json /etc/opt/taiga-front/conf.json; \
+    \
+    find /usr/local -depth \
+        \( \
+            # taiga-back requires django.test and there's no other test directory
+            \( -type d -a -name tests \) \
+            -o \
+            \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
+        \) -exec rm -rf '{}' +; \
+    apk del .build-deps; \
+    rm -rf /var/cache/apk/*
 COPY files /
 WORKDIR /opt/taiga-back
 ENV \

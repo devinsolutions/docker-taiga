@@ -201,3 +201,15 @@ DATABASES = {
 #    "app_id": "XXXXXX_get_a_valid_app_id_from_asana_XXXXXX",
 #    "app_secret": "XXXXXX_get_a_valid_app_secret_from_asana_XXXXXX"
 #}
+
+
+#########################################
+## SIGN IN WITH GOOGLE
+#########################################
+
+# Get these from https://console.cloud.google.com/apis/credentials
+# GOOGLE_API_CLIENT_ID = ''
+# GOOGLE_API_CLIENT_SECRET = ''
+# GOOGLE_API_REDIRECT_URI = ''
+# GOOGLE_RESTRICT_LOGIN = []
+# GOOGLE_API_ALLOW_DOMAIN = []
