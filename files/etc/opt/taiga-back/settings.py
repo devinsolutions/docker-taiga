@@ -2,6 +2,8 @@
 # https://docs.djangoproject.com/en/1.11/ref/settings/ and
 # https://github.com/taigaio/taiga-back/tree/stable/settings. Documentation for
 # custom Taiga settings can be found at https://taigaio.github.io/taiga-doc/dist/.
+# Make sure to read https://docs.djangoproject.com/en/1.11/topics/security/ to
+# learn how to secure your deployment.
 
 #########################################
 ## GENERIC
