@@ -36,12 +36,17 @@ main() {
 		case "${command}" in
 			"migrate")
 				run_check
+
 				# Several migrations write to the media directory
 				drop_privileges ./manage.py migrate --no-input
 				;;
 			"runserver")
 				run_check
-				./manage.py collectstatic --no-input
+
+				chown -R taiga:taiga /srv/taiga-back/static
+				drop_privileges ./manage.py collectstatic --no-input
+				chown -R root:root /srv/taiga-back/static
+
 				exec uwsgi /usr/local/etc/uwsgi/uwsgi.ini
 				;;
 			*)
