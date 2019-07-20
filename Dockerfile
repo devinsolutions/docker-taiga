@@ -75,7 +75,9 @@ RUN set -ex; \
     mv /opt/taiga-front/conf.example.json /etc/opt/taiga-front/conf.json; \
     ln -s /etc/opt/taiga-front/conf.json /opt/taiga-front/conf.json; \
     \
-    chmod -R go-w /opt/taiga-back /opt/taiga-front; \
+    find /opt/taiga-back /opt/taiga-front -type d -exec chmod 755 '{}' +; \
+    find /opt/taiga-back /opt/taiga-front -type f -exec chmod 644 '{}' +; \
+    chmod 755 /opt/taiga-back/manage.py; \
     \
     find /opt/taiga-back /usr/local -depth \
         \( \
