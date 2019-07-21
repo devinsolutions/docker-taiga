@@ -1,0 +1,7 @@
+{
+    "url": "amqp://guest:guest@broker/taiga",
+    "secret": "9%pno@m688el28@2+^y4v^&6wluqk-g#j#d7$dsjtht)o30dn1",
+    "webSocketServer": {
+        "port": 8080
+    }
+}
