@@ -37,7 +37,8 @@ services:
       # Taiga-events seems unable to reconnect to message broker when connection cannot be
       # established or is closed. There also does not seem to be another way to tell if the server
       # is actually able to communicate with the broker.
-      test: "! egrep -m 1 -q '^Unhandled rejection ' /var/log/taiga-events.log"
+      test: "wget -q -t 1 http://localhost:8080 2>&1 | grep -q '426 Upgrade Required' &&
+        ! egrep -m 1 -q '^Unhandled rejection ' /var/log/taiga-events.log"
     volumes:
       - ./docker-compose/events.json:/etc/opt/taiga-events/config.json:ro
   migrations:
