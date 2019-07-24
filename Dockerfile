@@ -17,16 +17,12 @@ RUN set -ex; \
         pcre-dev \
     ; \
     \
-    pip install --no-cache-dir 'uWSGI>=2.0,<2.1'; \
+    export PYTHONDONTWRITEBYTECODE=yes; \
+    pip install --no-cache-dir --no-compile 'uWSGI>=2.0,<2.1'; \
+    \
     addgroup -g 101 -S taiga; \
     adduser -D -H -g taiga -G taiga -s /sbin/nologin -S -u 101 taiga; \
     \
-    find /usr/local -depth \
-        \( \
-            \( -type d -a \( -name test -o -name tests \) \) \
-            -o \
-            \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
-        \) -exec rm -rf '{}' +; \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
@@ -50,13 +46,14 @@ RUN set -ex; \
         https://github.com/taigaio/taiga-back/archive/${TAIGA_VERSION}.tar.gz; \
     echo "${TAIGA_BACK_SHA256SUM}  taiga-back.tar.gz" | sha256sum -c; \
     tar -xzf taiga-back.tar.gz; \
-    rm -r taiga-back.tar.gz taiga-back-${TAIGA_VERSION}/tests; \
+    rm -r taiga-back.tar.gz; \
     mv taiga-back-${TAIGA_VERSION} /opt/taiga-back; \
     cd /opt/taiga-back; \
     # Django 1.11.20 is insecure
     sed -i '/^django==/ s/1\.11\.20$/1.11.22/' requirements.txt; \
     sed -i '/^gunicorn==/d' requirements.txt; \
-    pip install --no-cache-dir -r requirements.txt; \
+    export PYTHONDONTWRITEBYTECODE=yes; \
+    pip install --no-cache-dir --no-compile -r requirements.txt; \
     ./manage.py compilemessages; \
     mkdir -p /etc/opt/taiga-back /srv/taiga-back/media /srv/taiga-back/static; \
     cd -; \
@@ -79,13 +76,7 @@ RUN set -ex; \
     find /opt/taiga-back /opt/taiga-front -type f -exec chmod 644 '{}' +; \
     chmod 755 /opt/taiga-back/manage.py; \
     \
-    find /opt/taiga-back /usr/local -depth \
-        \( \
-            # taiga-back requires django.test and there's no other test directory
-            \( -type d -a -name tests \) \
-            -o \
-            \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
-        \) -exec rm -rf '{}' +; \
+    find /opt/taiga-back /usr/local -depth -type d -name tests -exec rm -rf '{}' +; \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
 COPY files /
