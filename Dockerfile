@@ -50,7 +50,7 @@ RUN set -ex; \
     mv taiga-back-${TAIGA_VERSION} /opt/taiga-back; \
     cd /opt/taiga-back; \
     # Django 1.11.20 is insecure
-    sed -i '/^django==/ s/1\.11\.20$/1.11.22/' requirements.txt; \
+    sed -i '/^django==/ s/1\.11\.20$/1.11.23/' requirements.txt; \
     sed -i '/^gunicorn==/d' requirements.txt; \
     export PYTHONDONTWRITEBYTECODE=yes; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
