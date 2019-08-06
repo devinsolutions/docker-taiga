@@ -26,9 +26,9 @@ RUN set -ex; \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
-ENV TAIGA_VERSION=4.2.11 \
-    TAIGA_BACK_SHA256SUM=dc04904e3264b4fa1282aa227015a890ca693ef4f2625e1a6c9979cc0c0ad08a \
-    TAIGA_FRONT_SHA256SUM=b5c922409b300940e391f16b062ef9c5fbf3c2d938ad0a095072b3cc676089a6
+ENV TAIGA_VERSION=4.2.12 \
+    TAIGA_BACK_SHA256SUM=73f4c58a9ce1e18c0cc541354c32275549027bd195a00d930034dbd3a8b23dfb \
+    TAIGA_FRONT_SHA256SUM=5108de2580b7f344d86e020cab83ecc6c635496ea97b5a6648f420e1202c8da7
 RUN set -ex; \
     \
     apk add --no-cache --virtual .build-deps \
@@ -49,8 +49,8 @@ RUN set -ex; \
     rm -r taiga-back.tar.gz; \
     mv taiga-back-${TAIGA_VERSION} /opt/taiga-back; \
     cd /opt/taiga-back; \
-    # Django 1.11.20 is insecure
-    sed -i '/^django==/ s/1\.11\.20$/1.11.23/' requirements.txt; \
+    # Django 1.11.22 is insecure
+    sed -i '/^django==/ s/1\.11\.22$/1.11.23/' requirements.txt; \
     sed -i '/^gunicorn==/d' requirements.txt; \
     export PYTHONDONTWRITEBYTECODE=yes; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
