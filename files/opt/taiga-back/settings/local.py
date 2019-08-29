@@ -10,6 +10,8 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
+ADMINS = []
+
 # The default configuration assumes the app is behind a trusted proxy, which is not necessarily
 # true and if it's not, then the default configuration is insecure.
 USE_X_FORWARDED_HOST = False
