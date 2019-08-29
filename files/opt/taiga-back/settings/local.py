@@ -10,6 +10,11 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
+# The default configuration assumes the app is behind a trusted proxy, which is not necessarily
+# true and if it's not, then the default configuration is insecure.
+USE_X_FORWARDED_HOST = False
+SECURE_PROXY_SSL_HEADER = None
+
 SITES['api']['domain'] = SITES['front']['domain'] = 'localhost:8080'
 
 # Prevent secret key reuse
