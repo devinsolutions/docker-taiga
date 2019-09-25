@@ -45,6 +45,12 @@ RUN set -ex; \
         zlib-dev \
     ; \
     \
+    mkdir -p \
+        /etc/opt/taiga-back \
+        /etc/opt/taiga-front \
+        /srv/taiga-back/media \
+        /srv/taiga-back/static; \
+    \
     wget -q -O taiga-back.tar.gz \
         https://github.com/taigaio/taiga-back/archive/${TAIGA_VERSION}.tar.gz; \
     echo "${TAIGA_BACK_SHA256SUM}  taiga-back.tar.gz" | sha256sum -c; \
@@ -57,7 +63,6 @@ RUN set -ex; \
     sed -i '/^gunicorn==/d' requirements.txt; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
     ./manage.py compilemessages; \
-    mkdir -p /etc/opt/taiga-back /srv/taiga-back/media /srv/taiga-back/static; \
     cd -; \
     \
     wget -q -O taiga-front-dist.tar.gz \
@@ -66,7 +71,6 @@ RUN set -ex; \
     tar -xzf taiga-front-dist.tar.gz; \
     mv taiga-front-dist-${TAIGA_VERSION}-stable/dist /opt/taiga-front; \
     rm -r taiga-front-dist.tar.gz taiga-front-dist-${TAIGA_VERSION}-stable; \
-    mkdir -p /etc/opt/taiga-front; \
     # Removes origin from "api" URL. By default, the API is served on port
     # 8080. Also, the URL doesn't have to be absolute, so this make the
     # default configuration more generic.
