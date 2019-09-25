@@ -2,6 +2,8 @@
 FROM python:3.6-alpine3.10
 RUN set -ex; \
     \
+    export PYTHONDONTWRITEBYTECODE=yes; \
+    \
     apk add --no-cache \
         libjpeg-turbo \
         libpq \
@@ -17,7 +19,6 @@ RUN set -ex; \
         pcre-dev \
     ; \
     \
-    export PYTHONDONTWRITEBYTECODE=yes; \
     pip install --no-cache-dir --no-compile 'uWSGI>=2.0,<2.1'; \
     \
     addgroup -g 101 -S taiga; \
@@ -30,6 +31,8 @@ ENV TAIGA_VERSION=4.2.12 \
     TAIGA_BACK_SHA256SUM=73f4c58a9ce1e18c0cc541354c32275549027bd195a00d930034dbd3a8b23dfb \
     TAIGA_FRONT_SHA256SUM=5108de2580b7f344d86e020cab83ecc6c635496ea97b5a6648f420e1202c8da7
 RUN set -ex; \
+    \
+    export PYTHONDONTWRITEBYTECODE=yes; \
     \
     apk add --no-cache --virtual .build-deps \
         gcc \
@@ -52,7 +55,6 @@ RUN set -ex; \
     # Django 1.11.22 is insecure
     sed -i '/^django==/ s/1\.11\.22$/1.11.23/' requirements.txt; \
     sed -i '/^gunicorn==/d' requirements.txt; \
-    export PYTHONDONTWRITEBYTECODE=yes; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
     ./manage.py compilemessages; \
     mkdir -p /etc/opt/taiga-back /srv/taiga-back/media /srv/taiga-back/static; \
