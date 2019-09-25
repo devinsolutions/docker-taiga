@@ -63,6 +63,23 @@ RUN set -ex; \
     sed -i '/^gunicorn==/d' requirements.txt; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
     ./manage.py compilemessages; \
+    find . -mindepth 1 \( \
+            -name '*.po' -o ! \( \
+                -path ./LICENSE \
+                -o \
+                -path ./manage.py \
+                -o \
+                -path ./NOTICE \
+                -o \
+                -path ./settings \
+                -o \
+                -path ./settings/'*' \
+                -o \
+                -path ./taiga \
+                -o \
+                -path ./taiga/'*' \
+            \) \
+        \) -exec rm -rf '{}' +; \
     cd -; \
     \
     wget -q -O taiga-front-dist.tar.gz \
@@ -82,7 +99,7 @@ RUN set -ex; \
     find /opt/taiga-back /opt/taiga-front -type f -exec chmod 644 '{}' +; \
     chmod 755 /opt/taiga-back/manage.py; \
     \
-    find /opt/taiga-back /usr/local -depth -type d -name tests -exec rm -rf '{}' +; \
+    find /usr/local -depth -type d -name tests -exec rm -rf '{}' +; \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
 COPY files /
