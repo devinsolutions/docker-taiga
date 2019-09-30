@@ -49,7 +49,8 @@ RUN set -ex; \
         /etc/opt/taiga-back \
         /etc/opt/taiga-front \
         /srv/taiga-back/media \
-        /srv/taiga-back/static; \
+        /srv/taiga-back/static \
+    ; \
     \
     wget -q -O taiga-back.tar.gz \
         https://github.com/taigaio/taiga-back/archive/${TAIGA_VERSION}.tar.gz; \
