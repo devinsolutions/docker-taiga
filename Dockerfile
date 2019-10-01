@@ -1,5 +1,4 @@
-# Python 3.7 is currently not suppored. See https://github.com/taigaio/taiga-back/issues/1328.
-FROM python:3.6-alpine3.10
+FROM python:3.7-alpine3.10
 RUN set -ex; \
     \
     export PYTHONDONTWRITEBYTECODE=yes; \
