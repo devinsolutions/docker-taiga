@@ -28,7 +28,7 @@ RUN set -ex; \
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
 ENV TAIGA_VERSION=4.2.14 \
     TAIGA_BACK_SHA256SUM=83778c4753478de7dca9b8f50e504c93fee3a3b04e0a856a0676862a7e0a5387 \
-    TAIGA_FRONT_SHA256SUM=b315135f5cafb9f9c9a8731f5c1ab181dc6acd3ff641d5d83b3585fd3faab7c1
+    TAIGA_FRONT_SHA256SUM=ef815345d3568ef05c211863e523ad260a878655b87c41a7976fdca4a8fc0530
 RUN set -ex; \
     \
     export PYTHONDONTWRITEBYTECODE=yes; \
@@ -82,11 +82,11 @@ RUN set -ex; \
     cd -; \
     \
     wget -q -O taiga-front-dist.tar.gz \
-        https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}.tar.gz; \
+        https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.tar.gz; \
     echo "${TAIGA_FRONT_SHA256SUM}  taiga-front-dist.tar.gz" | sha256sum -c; \
     tar -xzf taiga-front-dist.tar.gz; \
-    mv taiga-front-dist-${TAIGA_VERSION}/dist /opt/taiga-front; \
-    rm -r taiga-front-dist.tar.gz taiga-front-dist-${TAIGA_VERSION}; \
+    mv taiga-front-dist-${TAIGA_VERSION}-stable/dist /opt/taiga-front; \
+    rm -r taiga-front-dist.tar.gz taiga-front-dist-${TAIGA_VERSION}-stable; \
     # Removes origin from "api" URL. By default, the API is served on port
     # 8080. Also, the URL doesn't have to be absolute, so this make the
     # default configuration more generic.
