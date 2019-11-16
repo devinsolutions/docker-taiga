@@ -23,6 +23,13 @@ RUN set -ex; \
     addgroup -g 101 -S taiga; \
     adduser -D -H -g taiga -G taiga -s /sbin/nologin -S -u 101 taiga; \
     \
+    mkdir -p \
+        /etc/opt/taiga-back \
+        /etc/opt/taiga-front \
+        /srv/taiga-back/media \
+        /srv/taiga-back/static \
+    ; \
+    \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
@@ -43,13 +50,6 @@ RUN set -ex; \
         musl-dev \
         postgresql-dev \
         zlib-dev \
-    ; \
-    \
-    mkdir -p \
-        /etc/opt/taiga-back \
-        /etc/opt/taiga-front \
-        /srv/taiga-back/media \
-        /srv/taiga-back/static \
     ; \
     \
     wget -q -O taiga-back.tar.gz \
