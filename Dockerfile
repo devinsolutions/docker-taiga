@@ -110,7 +110,7 @@ RUN set -ex; \
     \
     find /opt/taiga-front -type d -exec chmod 755 '{}' +; \
     find /opt/taiga-front -type f -exec chmod 644 '{}' +
-COPY files /
+COPY root /
 WORKDIR /opt/taiga-back
 ENV \
     # See https://uwsgi-docs.readthedocs.io/en/latest/HTTP.html.

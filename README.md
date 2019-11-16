@@ -15,7 +15,7 @@ example can be found in `docker-compose.yml` and an advanced one in
 ### Configuring taiga-back
 
 taiga-back can be configured using `/etc/opt/taiga-back/settings.py`. See
-`files/etc/opt/taiga-back/settings.py` in this repository for the default
+`root/etc/opt/taiga-back/settings.py` in this repository for the default
 configuration and information about all the settings.
 
 ### Configuring taiga-front
