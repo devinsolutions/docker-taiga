@@ -33,8 +33,8 @@ RUN set -ex; \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
-ENV TAIGA_BACK_VERSION=4.2.14 \
-    TAIGA_BACK_SHA256SUM=83778c4753478de7dca9b8f50e504c93fee3a3b04e0a856a0676862a7e0a5387
+ENV TAIGA_BACK_VERSION=5.0.0 \
+    TAIGA_BACK_SHA256SUM=e0db1d812194ec192a8f8c235218016bfa60cca77630f734b202a917730986fd
 RUN set -ex; \
     \
     export PYTHONDONTWRITEBYTECODE=yes; \
@@ -90,8 +90,8 @@ RUN set -ex; \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
-ENV TAIGA_FRONT_VERSION=4.2.14 \
-    TAIGA_FRONT_SHA256SUM=ef815345d3568ef05c211863e523ad260a878655b87c41a7976fdca4a8fc0530
+ENV TAIGA_FRONT_VERSION=5.0.1 \
+    TAIGA_FRONT_SHA256SUM=a560d9a47f503bfd7d06a2112c6b0bc61f53bd64afc33023d00120e57e95c812
 RUN set -ex; \
     \
     wget -q -O taiga-front-dist.tar.gz \
