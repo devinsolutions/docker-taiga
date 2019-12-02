@@ -90,8 +90,8 @@ RUN set -ex; \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
-ENV TAIGA_FRONT_VERSION=5.0.2 \
-    TAIGA_FRONT_SHA256SUM=144661607e0af976ed75291633882161525db32a79cbc8c6dc0f2003329cf98f
+ENV TAIGA_FRONT_VERSION=5.0.3 \
+    TAIGA_FRONT_SHA256SUM=158afbb6ec8867cf462d41bca07aae4f8609a586583e4644fa5fb242ff9d02c6
 RUN set -ex; \
     \
     wget -q -O taiga-front-dist.tar.gz \
