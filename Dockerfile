@@ -101,15 +101,17 @@ RUN set -ex; \
     mv taiga-front-dist-${TAIGA_FRONT_VERSION}-stable/dist /opt/taiga-front; \
     rm -r taiga-front-dist.tar.gz taiga-front-dist-${TAIGA_FRONT_VERSION}-stable; \
     \
+    cd /opt/taiga-front; \
+    \
     # Removes origin from "api" URL. By default, the API is served on port
     # 8080. Also, the URL doesn't have to be absolute, so this make the
     # default configuration more generic.
-    sed -i 's|http://localhost:8000||' /opt/taiga-front/conf.example.json; \
-    mv /opt/taiga-front/conf.example.json /etc/opt/taiga-front/conf.json; \
-    ln -s /etc/opt/taiga-front/conf.json /opt/taiga-front/conf.json; \
+    sed -i 's|http://localhost:8000||' conf.example.json; \
+    mv conf.example.json /etc/opt/taiga-front/conf.json; \
+    ln -s /etc/opt/taiga-front/conf.json conf.json; \
     \
-    find /opt/taiga-front -type d -exec chmod 755 '{}' +; \
-    find /opt/taiga-front -type f -exec chmod 644 '{}' +
+    find . -type d -exec chmod 755 '{}' +; \
+    find . -type f -exec chmod 644 '{}' +
 COPY root /
 WORKDIR /opt/taiga-back
 ENV \
