@@ -126,5 +126,5 @@ ENV \
     UWSGI_OFFLOAD_THREADS=1
 USER taiga
 ENTRYPOINT ["taiga-ctl"]
-CMD ["migrate", "runserver"]
+CMD ["migrate", "run-server"]
 EXPOSE 8080

@@ -57,7 +57,7 @@ services:
       - ./docker-compose/default.conf:/etc/nginx/conf.d/default.conf:ro
   server:
     <<: *taiga-common
-    command: runserver
+    command: run-server
     deploy:
       replicas: 1
       update_config:

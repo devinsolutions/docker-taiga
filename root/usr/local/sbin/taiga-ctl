@@ -21,7 +21,7 @@ main() {
 		echo "Available commands are:"
 		echo
 		echo "  migrate     Runs Django migrations"
-		echo "  runserver   Collects static files and starts uWSGI server"
+		echo "  run-server  Collects static files and starts uWSGI server"
 		echo
 		exit
 	fi
@@ -34,7 +34,7 @@ main() {
 				# Several migrations write to the media directory
 				./manage.py migrate --no-input
 				;;
-			"runserver")
+			"runserver"|"run-server")
 				run_check
 
 				chmod -R u+w /srv/taiga-back/static
