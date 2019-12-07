@@ -29,6 +29,10 @@ RUN set -ex; \
         /srv/taiga-back/media \
         /srv/taiga-back/static \
     ; \
+    chown taiga:taiga \
+        /srv/taiga-back/media \
+        /srv/taiga-back/static \
+    ; \
     \
     apk del .build-deps; \
     rm -rf /var/cache/apk/*
@@ -120,6 +124,7 @@ ENV \
     # See https://uwsgi-docs.readthedocs.io/en/latest/StaticFiles.html#offloading and
     # https://uwsgi-docs.readthedocs.io/en/latest/OffloadSubsystem.html.
     UWSGI_OFFLOAD_THREADS=1
+USER taiga
 ENTRYPOINT ["taiga-ctl"]
 CMD ["migrate", "runserver"]
 EXPOSE 8080

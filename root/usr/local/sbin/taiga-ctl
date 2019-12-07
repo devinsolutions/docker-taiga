@@ -2,20 +2,12 @@
 
 check_passed=0
 
-drop_privileges() {
-	su -p taiga -s /bin/sh -c "$*"
-}
-
-run_manage() {
-	drop_privileges ./manage.py "$@"
-}
-
 run_check() {
 	if [ "${check_passed}" -ne 0 ]; then
 		return
 	fi
 
-	run_manage check --deploy
+	./manage.py check --deploy
 
 	check_passed=1
 }
@@ -34,22 +26,20 @@ main() {
 		exit
 	fi
 
-	chown -R taiga:taiga /srv/taiga-back/media
-
 	for command in "$@"; do
 		case "${command}" in
 			"migrate")
 				run_check
 
 				# Several migrations write to the media directory
-				run_manage migrate --no-input
+				./manage.py migrate --no-input
 				;;
 			"runserver")
 				run_check
 
-				chown -R taiga:taiga /srv/taiga-back/static
-				run_manage collectstatic --no-input
-				chown -R root:root /srv/taiga-back/static
+				chmod -R u+w /srv/taiga-back/static
+				./manage.py collectstatic --no-input
+				chmod -R a-w /srv/taiga-back/static
 
 				exec uwsgi /usr/local/etc/uwsgi/uwsgi.ini
 				;;
