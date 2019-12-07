@@ -43,7 +43,11 @@ services:
       - ./docker-compose/events.json:/etc/opt/taiga-events/config.json:ro
   migrations:
     <<: *taiga-common
-    command: migrate
+    command:
+      - migrate
+      # Make sure this command is run only during the initial setup as it will
+      # overwrite existing data.
+      # - populate-db
     deploy:
       restart_policy:
         condition: on-failure
