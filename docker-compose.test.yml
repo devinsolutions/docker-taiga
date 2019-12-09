@@ -3,3 +3,4 @@ services:
   sut:
     image: "${IMAGE_NAME}"
     entrypoint: [sh, -ec, "pip install safety; safety check"]
+    user: root
