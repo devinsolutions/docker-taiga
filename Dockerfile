@@ -1,4 +1,4 @@
-FROM python:3.7-alpine3.10
+FROM python:3.7-alpine3.11
 RUN set -ex; \
     \
     export PYTHONDONTWRITEBYTECODE=yes; \
