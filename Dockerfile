@@ -90,7 +90,7 @@ RUN set -ex; \
             \) \
         \) -exec rm -rf '{}' +; \
     \
-    find . -type d -exec chmod 755 '{}' +; \
+    find . \( -type d -o -type f -path ./manage.py \) -exec chmod 755 '{}' +; \
     find . -type f ! -path ./manage.py -exec chmod 644 '{}' +; \
     \
     apk del .build-deps; \
