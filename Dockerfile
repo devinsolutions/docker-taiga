@@ -1,6 +1,9 @@
 FROM python:3.7-alpine3.11
 RUN set -ex; \
     \
+    export CFLAGS="-Os"; \
+    export CPPFLAGS="${CFLAGS}"; \
+    export LDFLAGS="-Wl,--strip-all"; \
     export PYTHONDONTWRITEBYTECODE=yes; \
     \
     apk add --no-cache \
@@ -41,6 +44,9 @@ ENV TAIGA_BACK_VERSION=5.0.5 \
     TAIGA_BACK_SHA256SUM=9eea621bb0da9f13c49928360b4b8e59e2ca2303218d7b1280aab72909ac3521
 RUN set -ex; \
     \
+    export CFLAGS="-Os"; \
+    export CPPFLAGS="${CFLAGS}"; \
+    export LDFLAGS="-Wl,--strip-all"; \
     export PYTHONDONTWRITEBYTECODE=yes; \
     \
     apk add --no-cache --virtual .build-deps \
