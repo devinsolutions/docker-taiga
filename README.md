@@ -20,7 +20,7 @@ configuration and information about all the settings.
 
 ### Configuring taiga-front
 
-taiga-back can be configured using `/etc/opt/taiga-front/conf.json`. See
+taiga-front can be configured using `/etc/opt/taiga-front/conf.json`. See
 [conf.example.json](
 https://github.com/taigaio/taiga-front/blob/stable/conf/conf.example.json) for
 the default configuration.
@@ -36,7 +36,7 @@ cannot be overridden using environmental variables. Also, using environmental
 variables is the easiest way to extend the default configuration without the
 need duplicate contents on the configuration file.
 
-See `Dockerfile` to learn about the variables export by default and their
+See `Dockerfile` to learn about the variables exported by default and their
 significance.
 
 #### Graceful shutdown
