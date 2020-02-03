@@ -72,7 +72,7 @@ RUN set -ex; \
     \
     sed -i '/^gunicorn==/d' requirements.txt; \
     # Django versions prior to 1.11.27 are insecure
-    sed -i '/^django==1\.11\./ s/[0-9]*$/27/' requirements.txt; \
+    sed -i '/^django==1\.11\./ s/[0-9]*$/28/' requirements.txt; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
     find /usr/local -depth -type d -name tests -exec rm -rf '{}' +; \
     \
