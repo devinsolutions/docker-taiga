@@ -8,7 +8,7 @@ RUN set -ex; \
     \
     apk add --no-cache \
         libjpeg-turbo \
-        libpq \
+        libpq\>=12.2-r0 \
         libxslt \
         mailcap \
         pcre \
