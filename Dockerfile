@@ -40,8 +40,8 @@ RUN set -ex; \
     apk del .build-deps; \
     rm -rf /root/.cache /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
-ENV TAIGA_BACK_VERSION=5.0.8 \
-    TAIGA_BACK_SHA256SUM=1fb6643235f6c3a04153178e6f5a2763a452f86ccdf678aa346b55e161eec3d5
+ENV TAIGA_BACK_VERSION=5.0.9 \
+    TAIGA_BACK_SHA256SUM=59de4ae8440dbc02cb9dfe99e5305d68565d6a5f664729781806732c246aad4a
 RUN set -ex; \
     \
     export CFLAGS="-Os"; \
@@ -71,8 +71,6 @@ RUN set -ex; \
     cd /opt/taiga-back; \
     \
     sed -i '/^gunicorn==/d' requirements.txt; \
-    # Django versions prior to 1.11.29 are insecure
-    sed -i '/^django==1\.11\./ s/[0-9]*$/29/' requirements.txt; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
     find /usr/local -depth -type d -name tests -exec rm -rf '{}' +; \
     \
@@ -102,8 +100,8 @@ RUN set -ex; \
     apk del .build-deps; \
     rm -rf /root/.cache /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
-ENV TAIGA_FRONT_VERSION=5.0.8 \
-    TAIGA_FRONT_SHA256SUM=105a60ff8545279c32fcd93cd9d746bc2a41f26617857c122c145caa8cb48e38
+ENV TAIGA_FRONT_VERSION=5.0.9 \
+    TAIGA_FRONT_SHA256SUM=22c9fbbd8c783da362d8fc0d1ffb9b9f719d101330703383437ddee4c188723b
 RUN set -ex; \
     \
     wget -q -O taiga-front-dist.tar.gz \
