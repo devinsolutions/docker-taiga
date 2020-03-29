@@ -11,7 +11,7 @@ x-taiga-common: &taiga-common
     - ./docker-compose/settings.py:/etc/opt/taiga-back/settings.py:ro
 services:
   broker:
-    image: rabbitmq:3.7
+    image: rabbitmq:3.8
     environment:
       RABBITMQ_DEFAULT_VHOST: taiga
       RABBITMQ_NODENAME: rabbit@localhost
