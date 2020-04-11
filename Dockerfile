@@ -71,6 +71,8 @@ RUN set -ex; \
     cd /opt/taiga-back; \
     \
     sed -i '/^gunicorn==/d' requirements.txt; \
+    # Bleach versions prior to 3.1.4 are insecure
+    sed -i '/^bleach==3\.1\./ s/[0-9]*$/4/' requirements.txt; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
     find /usr/local -depth -type d -name tests -exec rm -rf '{}' +; \
     \
