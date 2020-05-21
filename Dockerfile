@@ -40,8 +40,8 @@ RUN set -ex; \
     apk del .build-deps; \
     rm -rf /root/.cache /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
-ENV TAIGA_BACK_VERSION=5.0.10 \
-    TAIGA_BACK_SHA256SUM=f7805ec92b96b42790f33639f2f48827b21f70446bf3849c05583d5a7dc6e859
+ENV TAIGA_BACK_VERSION=5.0.11 \
+    TAIGA_BACK_SHA256SUM=ade44f5cd3c64d026b3b651b918d7e1325b1b8a082f533f609876a48f8ffff86
 RUN set -ex; \
     \
     export CFLAGS="-Os"; \
@@ -71,8 +71,6 @@ RUN set -ex; \
     cd /opt/taiga-back; \
     \
     sed -i '/^gunicorn==/d' requirements.txt; \
-    # Bleach versions prior to 3.1.4 are insecure
-    sed -i '/^bleach==3\.1\./ s/[0-9]*$/4/' requirements.txt; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
     find /usr/local -depth -type d -name tests -exec rm -rf '{}' +; \
     \
@@ -102,8 +100,8 @@ RUN set -ex; \
     apk del .build-deps; \
     rm -rf /root/.cache /var/cache/apk/*
 # !!! DO NOT FORGET TO UPDATE "tags" FILE !!!
-ENV TAIGA_FRONT_VERSION=5.0.10 \
-    TAIGA_FRONT_SHA256SUM=022114444c371ba59f32f12a7f549a8405a69c4edc12fee132cc75ea2550de86
+ENV TAIGA_FRONT_VERSION=5.0.11 \
+    TAIGA_FRONT_SHA256SUM=0ad9695c835a0a5ce21853dc6597947a848fb075898a3df34dfa71231bcc5cfc
 RUN set -ex; \
     \
     wget -q -O taiga-front-dist.tar.gz \
