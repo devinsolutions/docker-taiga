@@ -31,10 +31,10 @@ STATIC_URL = "http://localhost:8080/static/"
 # Helps with cache busting
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-if 'django.middleware.security.SecurityMiddleware' not in MIDDLEWARE_CLASSES:
-    MIDDLEWARE_CLASSES = [
+if 'django.middleware.security.SecurityMiddleware' not in MIDDLEWARE:
+    MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
-    ] + MIDDLEWARE_CLASSES
+    ] + MIDDLEWARE
 
 SILENCED_SYSTEM_CHECKS = [
     # X-Frame-Options header is set by the server
