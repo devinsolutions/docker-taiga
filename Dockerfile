@@ -71,6 +71,8 @@ RUN set -ex; \
     cd /opt/taiga-back; \
     \
     sed -i '/^gunicorn==/d' requirements.txt; \
+    # psd-tools versions prior to 1.8.31 require potentially insecure Pillow versions
+    sed -i 's/^\(psd-tools==1\.8\.\).*/\131/' requirements.txt; \
     pip install --no-cache-dir --no-compile -r requirements.txt; \
     find /usr/local -depth -type d -name tests -exec rm -rf '{}' +; \
     \
