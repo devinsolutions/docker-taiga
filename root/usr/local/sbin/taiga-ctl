@@ -31,7 +31,7 @@ main() {
 		echo "Available commands are:"
 		echo
 		echo "  migrate       Runs Django migrations"
-		echo "	populate-db   Populates the database with initial data"
+		echo "  populate-db   Populates the database with initial data"
 		echo "  run-server    Collects static files and starts uWSGI server"
 		echo
 		exit
