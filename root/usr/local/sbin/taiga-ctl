@@ -13,6 +13,16 @@ run_check() {
 }
 
 main() {
+	cat >&2 <<-EOF
+	!!!!!!!!!!!!!!!!!!!!!!!!!! THIS IMAGE IS DEPRECATED !!!!!!!!!!!!!!!!!!!!!!!!!!
+
+	This image is deprecated and will no longer receive updates of the Taiga
+	version. After 1st October 2020, this image won't receive any updates at all.
+
+	!!!!!!!!!!!!!!!!!!!!!!!!!! THIS IMAGE IS DEPRECATED !!!!!!!!!!!!!!!!!!!!!!!!!!
+
+	EOF
+
 	BASENAME="$(basename "$0")"
 
 	if [ "$#" -lt 1 ]; then
@@ -21,7 +31,7 @@ main() {
 		echo "Available commands are:"
 		echo
 		echo "  migrate       Runs Django migrations"
-		echo "	populate-db   Populates the database with initial data"
+		echo "  populate-db   Populates the database with initial data"
 		echo "  run-server    Collects static files and starts uWSGI server"
 		echo
 		exit

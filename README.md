@@ -4,6 +4,14 @@ This is based on the official Python image (Alpine variant) and combines
 taiga-back and taiga-front components into a single container, which uses
 uWSGI to serve them both.
 
+## Image deprecation
+
+**This image is deprecated and will no longer receive updates of the Taiga
+version.** After 1st October 2020, this image won't receive any updates at all,
+and this repo will be archived. After that date, if the image becomes inactive
+on Docker Hub, it will be removed as per Docker Hub's [image retention policy](
+https://www.docker.com/pricing/resource-consumption-updates).
+
 ## Deployment
 
 Consult [Taiga: Setup production environment](
