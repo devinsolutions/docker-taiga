@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+cd /tmp
+pip freeze > requirements.txt
+export HOME=/tmp PATH="/tmp/.local/bin:${PATH}"
+pip install safety
+safety check -r requirements.txt

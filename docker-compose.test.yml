@@ -2,5 +2,6 @@ version: '3'
 services:
   sut:
     image: "${IMAGE_NAME}"
-    entrypoint: [sh, -ec, "pip install safety; safety check"]
-    user: root
+    entrypoint: tests
+    volumes:
+      - ./docker-compose/tests:/usr/local/sbin/tests:ro
